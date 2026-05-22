@@ -1,0 +1,18 @@
+{
+    "tabnet_threshold": 0.24,
+    "lightgbm_threshold": 0.5,
+    "feature_order": [
+        "age",
+        "trestbps",
+        "chol",
+        "oldpeak",
+        "sex",
+        "fbs",
+        "restecg",
+        "exang",
+        "slope",    
+        "ca",
+        "cp_0.0",
+        "thal_0.0"
+    ]
+}
