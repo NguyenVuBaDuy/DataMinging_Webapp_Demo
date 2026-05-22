@@ -14,3 +14,6 @@ from core.model_loader import load_all_resources
 from core.styles import inject_custom_css
 from core.ui_sidebar import render_sidebar
 from core.ui_input_form import render_input_form, render_input_summary
+from core.diagnosis import run_diagnosis
+from core.ui_results import render_diagnosis_result, render_xai_section
+from core.ui_samples import init_session_state_if_needed, render_sample_patients_tab

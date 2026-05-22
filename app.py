@@ -24,11 +24,19 @@ from core import (
     render_sidebar,
     render_input_form,
     render_input_summary,
+    run_diagnosis,
+    render_diagnosis_result,
+    render_xai_section,
+    init_session_state_if_needed,
+    render_sample_patients_tab,
 )
 
 # ============================================================
 # KHỞI TẠO
 # ============================================================
+
+# Khởi tạo session state cho form
+init_session_state_if_needed()
 
 # Inject CSS
 inject_custom_css()
@@ -43,20 +51,37 @@ resources = load_all_resources()
 # Sidebar: chọn model + nút chẩn đoán
 model_choice, threshold, diagnose_clicked = render_sidebar(resources)
 
-# Main area: form nhập liệu 12 features
-input_df, display_values = render_input_form(resources["feature_order"])
+# Main area: Tabs phân chia tính năng
+tab_input, tab_samples = st.tabs([
+    "📝 Nhập Chỉ Số Bệnh Nhân",
+    "👥 Bệnh Nhân Mẫu (Kho Lưu Trữ)"
+])
+
+with tab_input:
+    # Form nhập liệu 12 features
+    input_df, display_values = render_input_form(resources["feature_order"])
+
+with tab_samples:
+    # Kho dữ liệu bệnh nhân mẫu
+    render_sample_patients_tab(resources["sample_patients"])
 
 # Tóm tắt dữ liệu đã nhập
 render_input_summary(input_df, display_values)
 
 # ============================================================
-# XỬ LÝ CHẨN ĐOÁN (Bước 4 & 5 sẽ xây dựng ở đây)
+# XỬ LÝ CHẨN ĐOÁN (Bước 4-7)
 # ============================================================
-result_container = st.container()
 
 if diagnose_clicked:
-    with result_container:
-        st.markdown("---")
-        st.info("⏳ Chức năng chẩn đoán sẽ được xây dựng ở **Bước 4 & 5**. Dữ liệu đã sẵn sàng!")
-        st.markdown(f"**Model đã chọn:** `{model_choice}` | **Ngưỡng:** `{threshold}`")
-        st.dataframe(input_df, hide_index=True, use_container_width=True)
+    st.markdown("---")
+
+    # Bước 4: Chạy dự đoán
+    with st.spinner("🔬 Đang phân tích dữ liệu lâm sàng..."):
+        result = run_diagnosis(model_choice, resources, input_df)
+
+    # Bước 5: Hiển thị kết quả chẩn đoán
+    render_diagnosis_result(result)
+
+    # Bước 6 & 7: Hiển thị giải thích XAI (SHAP / Attention)
+    render_xai_section(model_choice, resources, input_df)
+

@@ -68,13 +68,23 @@ def load_shap_background_data():
     return data
 
 
+# --- Load sample patients test data ---
+@st.cache_data
+def load_sample_patients_data():
+    """Load danh sách bệnh nhân mẫu từ xai_insights_test.csv."""
+    data_path = os.path.join(CONFIG_DIR, "xai_insights_test.csv")
+    if os.path.exists(data_path):
+        return pd.read_csv(data_path)
+    return None
+
+
 def load_all_resources():
     """Load tất cả tài nguyên và trả về dict chứa mọi thứ cần thiết.
 
     Returns:
         dict với keys: config, feature_order, lightgbm_threshold,
         tabnet_threshold, lgbm_model, tabnet_model, tabnet_scaler,
-        shap_background
+        shap_background, sample_patients
     """
     config = load_config()
 
@@ -87,4 +97,6 @@ def load_all_resources():
         "tabnet_model": load_tabnet_model(),
         "tabnet_scaler": load_tabnet_scaler(),
         "shap_background": load_shap_background_data(),
+        "sample_patients": load_sample_patients_data(),
     }
+
