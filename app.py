@@ -58,7 +58,7 @@ tab_input, tab_samples = st.tabs([
 ])
 
 with tab_input:
-    # Form nhập liệu 12 features
+    # Form nhập liệu 13 features
     input_df, display_values = render_input_form(resources["feature_order"])
 
 with tab_samples:

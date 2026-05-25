@@ -1,5 +1,5 @@
 """
-ui_input_form.py - Form nhập liệu 12 chỉ số lâm sàng, chia 3 cột.
+ui_input_form.py - Form nhập liệu 13 chỉ số lâm sàng, chia 3 cột.
 """
 
 import pandas as pd
@@ -26,7 +26,7 @@ def render_input_form(feature_order):
     """, unsafe_allow_html=True)
 
     st.markdown("### 📝 Thông Tin Lâm Sàng Bệnh Nhân")
-    st.caption("Vui lòng nhập đầy đủ 12 chỉ số lâm sàng bên dưới để hệ thống phân tích.")
+    st.caption("Vui lòng nhập đầy đủ 13 chỉ số lâm sàng bên dưới để hệ thống phân tích.")
 
     # ============================
     # 3 CỘT NHẬP LIỆU
