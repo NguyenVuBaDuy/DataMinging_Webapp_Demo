@@ -1,0 +1,53 @@
+{
+    "tabnet_threshold": 0.2,
+    "lightgbm_threshold": 0.5,
+    "feature_order": [
+        "age",
+        "trestbps",
+        "chol",
+        "thalach",
+        "oldpeak",
+        "sex",
+        "fbs",
+        "restecg",
+        "exang",
+        "slope",
+        "ca",
+        "cp_0.0",
+        "thal_0.0"
+    ],
+    "n_features": 13,
+    "numeric_features": [
+        "age",
+        "trestbps",
+        "chol",
+        "thalach",
+        "oldpeak"
+    ],
+    "binary_features": [
+        "sex",
+        "fbs",
+        "restecg",
+        "exang",
+        "slope",
+        "ca",
+        "cp_0.0",
+        "thal_0.0"
+    ],
+    "best_tier1_model": "SVM",
+    "best_tier1_branch": "Baseline",
+    "best_tier2_model": "LightGBM",
+    "best_tier2_branch": "CTGAN",
+    "best_tier3_model": "TabNet",
+    "best_tier3_branch": "CTGAN",
+    "files": {
+        "tier1_model": "best_tier1_model.pkl",
+        "tier1_scaler": "tier1_scaler.pkl",
+        "tier2_model": "best_lightgbm_model.pkl",
+        "tier3_model": "best_tabnet_model.zip",
+        "tier3_scaler": "tabnet_scaler.pkl",
+        "shap_background": "shap_background_data.csv",
+        "x_test": "x_test_features.csv",
+        "y_test": "y_test_labels.csv"
+    }
+}

@@ -13,6 +13,7 @@ def init_session_state_if_needed():
         "age": 50,
         "trestbps": 120,
         "chol": 200,
+        "thalach": 150,
         "oldpeak": 1.0,
         "sex_display": "Nam",
         "fbs_display": "≤ 120 mg/dl (Bình thường)",
@@ -37,6 +38,7 @@ def load_patient_into_state(patient_row):
     st.session_state["age"] = int(patient_row["age"])
     st.session_state["trestbps"] = int(patient_row["trestbps"])
     st.session_state["chol"] = int(patient_row["chol"])
+    st.session_state["thalach"] = int(patient_row["thalach"])
     st.session_state["oldpeak"] = float(patient_row["oldpeak"])
 
     # Categorical mapping
@@ -122,6 +124,7 @@ def render_sample_patients_tab(df_patients):
         st.write(f"- 👤 **Giới tính:** {gender_str}")
         st.write(f"- 💉 **Huyết áp lúc nghỉ:** {int(selected_row['trestbps'])} mmHg")
         st.write(f"- 🧪 **Cholesterol:** {int(selected_row['chol'])} mg/dl")
+        st.write(f"- 💓 **Nhịp tim tối đa:** {int(selected_row['thalach'])} bpm")
 
     with col2:
         st.markdown("**🔬 Chỉ số điện tâm đồ & Khác:**")

@@ -49,13 +49,14 @@ def load_tabnet_model():
 def load_tabnet_scaler():
     """Load scaler (StandardScaler) dùng để chuẩn hóa dữ liệu trước khi đưa vào TabNet.
 
-    Note: File pickle chứa tuple (StandardScaler, training_data_array).
-    Chỉ cần lấy StandardScaler ở index [0].
+    Hỗ trợ cả trường hợp scaler trực tiếp hoặc nằm trong tuple (StandardScaler, ...).
     """
     scaler_path = os.path.join(CONFIG_DIR, "tabnet_scaler.pkl")
-    scaler_tuple = joblib.load(scaler_path)
-    # scaler_tuple = (StandardScaler, ndarray(184, 12))
-    scaler = scaler_tuple[0]
+    scaler_obj = joblib.load(scaler_path)
+    if isinstance(scaler_obj, tuple):
+        scaler = scaler_obj[0]
+    else:
+        scaler = scaler_obj
     return scaler
 
 

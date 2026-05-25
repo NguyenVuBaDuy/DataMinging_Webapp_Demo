@@ -85,7 +85,7 @@ def render_shap_waterfall(shap_values, input_df):
     fig, ax = plt.subplots(figsize=(10, 7))
     plt.sca(ax)
 
-    shap.waterfall_plot(sv, max_display=12, show=False)
+    shap.waterfall_plot(sv, max_display=13, show=False)
 
     plt.title("Đóng góp của từng chỉ số lâm sàng", fontsize=14, fontweight="bold", pad=15)
     plt.tight_layout()

@@ -58,6 +58,12 @@ def render_input_form(feature_order):
             help="Cholesterol trong máu",
             key="chol",
         )
+        thalach = st.slider(
+            "💓 Nhịp tim tối đa (bpm)",
+            min_value=60, max_value=220, step=1,
+            help="Nhịp tim tối đa đạt được khi vận động",
+            key="thalach",
+        )
         oldpeak = st.slider(
             "📉 Độ chênh ST khi vận động",
             min_value=0.0, max_value=6.5, step=0.1,
@@ -162,6 +168,7 @@ def render_input_form(feature_order):
         "age": age,
         "trestbps": trestbps,
         "chol": chol,
+        "thalach": thalach,
         "oldpeak": oldpeak,
         "sex": sex_val,
         "fbs": fbs_val,
@@ -178,6 +185,7 @@ def render_input_form(feature_order):
         "Tuổi": age,
         "Huyết áp (mmHg)": trestbps,
         "Cholesterol (mg/dl)": chol,
+        "Nhịp tim tối đa (bpm)": thalach,
         "Độ chênh ST": oldpeak,
         "Giới tính": sex,
         "Đường huyết": fbs,

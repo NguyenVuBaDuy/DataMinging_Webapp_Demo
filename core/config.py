@@ -9,7 +9,7 @@ import os
 # ĐƯỜNG DẪN
 # ============================================================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CONFIG_DIR = os.path.join(BASE_DIR, "models_and_config")
+CONFIG_DIR = os.path.join(BASE_DIR, "models_and_config_v2")
 
 # ============================================================
 # NHÃN TIẾNG VIỆT CHO FEATURES
@@ -18,6 +18,7 @@ FEATURE_LABELS_VI = {
     "age": "Tuổi",
     "trestbps": "Huyết áp lúc nghỉ (mmHg)",
     "chol": "Cholesterol huyết thanh (mg/dl)",
+    "thalach": "Nhịp tim tối đa (bpm)",
     "oldpeak": "Độ chênh ST khi vận động",
     "sex": "Giới tính",
     "fbs": "Đường huyết lúc đói",
