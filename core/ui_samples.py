@@ -75,6 +75,10 @@ def load_patient_into_state(patient_row):
     thal_val = float(patient_row["thal_0.0"])
     st.session_state["thal_display"] = "Bình thường (thal=0)" if thal_val == 1.0 else "Bất thường (thal≠0)"
 
+    # Lưu thông báo thành công vào session state để hiển thị sau rerun
+    st.session_state["patient_loaded_msg"] = f"🎉 Đã nạp thành công dữ liệu Bệnh nhân #{int(patient_row['Patient_Index'])} vào form! Hãy nhấn sang Tab '📝 Nhập Chỉ Số Bệnh Nhân' để kiểm tra hoặc bấm 'Tiến Hành Chẩn Đoán' ở sidebar."
+
+
 
 def render_sample_patients_tab(df_patients):
     """Render giao diện Tab Bệnh Nhân Mẫu.
@@ -147,9 +151,17 @@ def render_sample_patients_tab(df_patients):
 
     st.markdown("---")
 
-    # Nút bấm auto-fill dữ liệu vào form
-    if st.button("📥 Nạp Dữ Liệu Bệnh Nhân Này Vào Form Nhập Liệu", use_container_width=True, type="primary"):
-        load_patient_into_state(selected_row)
-        st.success(f"🎉 Đã nạp thành công dữ liệu Bệnh nhân #{int(selected_row['Patient_Index'])} vào form! Hãy nhấn sang Tab '📝 Nhập Chỉ Số Bệnh Nhân' để kiểm tra hoặc bấm 'Tiến Hành Chẩn Đoán' ở sidebar.")
-        # Buộc Streamlit reload trang để áp dụng session state mới cho các widget ngay lập tức
-        st.rerun()
+    # Nút bấm auto-fill dữ liệu vào form (sử dụng callback on_click để tránh lỗi StreamlitAPIException)
+    st.button(
+        "📥 Nạp Dữ Liệu Bệnh Nhân Này Vào Form Nhập Liệu",
+        use_container_width=True,
+        type="primary",
+        on_click=load_patient_into_state,
+        args=(selected_row,)
+    )
+
+    # Hiển thị thông báo thành công nếu có
+    if "patient_loaded_msg" in st.session_state and st.session_state["patient_loaded_msg"]:
+        st.success(st.session_state["patient_loaded_msg"])
+        del st.session_state["patient_loaded_msg"]
+
